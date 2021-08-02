@@ -1,0 +1,102 @@
+<html>
+
+<head>
+    <title>Stamps</title>
+    <link rel="stylesheet" href="Style.css">
+
+<body onload="LoadDefault();">
+    <div class="stack">
+        <canvas id="canvas" width="2048" height="1730"></canvas>
+    </div>
+
+    <div>
+        <label for="myfile">Select a Stamp Card:</label>
+        <input type='file' onchange="readURL(this);" />
+    </div>
+    <input type="button" onclick="Test();" id="btnSave" name="btnSave" value="Generate new Stamp Card">
+    <div>
+        <canvas id="canvas3" width="2048" height="1730"></canvas>
+    </div>
+</body>
+
+<script type="text/javascript">
+    function LoadDefault() {
+        var ctx = document.getElementById("canvas");
+        if (ctx.getContext) {
+
+            ctx = ctx.getContext('2d');
+
+
+            var img1 = new Image();
+
+
+            img1.onload = function () {
+                ctx.drawImage(img1, 0, 0);
+            };
+
+            img1.src = 'August Stamps.png';
+        }
+        topCanvas = document.createElement("canvas");
+        topCanvas.width = canvas.width;
+        topCanvas.setAttribute("id", "canvas2");
+        topCanvas.height = canvas.height;
+        canvas.parentNode.insertBefore(topCanvas, canvas);
+
+        var cn = document.getElementById("canvas2");
+        var c = cn.getContext("2d");
+        var mouse = { x: 0, y: 0 };
+
+        canvas.addEventListener('mousedown', mHandler);
+
+        function mHandler(event) {
+            if (event.button == 0) {
+                mouse.x = event.clientX;
+                mouse.y = event.clientY;
+            }
+
+        };
+
+        function main() {
+            img = new Image;
+            img.src = "Stamp.png";
+            width = img.width / 2;
+            height = img.height / 2;
+            c.clearRect(0, 0, cn.width, cn.height);
+            c.drawImage(img, mouse.x - width, mouse.y - height, img.width, img.height);
+        }
+        setInterval(main, 1000 / 60);
+
+    }
+
+    function Test() {
+            var can3 = document.getElementById('canvas3');
+            var ctx3 = can3.getContext('2d');
+            ctx3.drawImage(canvas, 0, 0);
+            ctx3.drawImage(canvas2, 0, 0);
+        }
+</script>
+
+<script type="text/javascript">
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var ctx = document.getElementById('canvas');
+                if (ctx.getContext) {
+
+                    ctx = ctx.getContext('2d');
+                    var img1 = new Image();
+                    img1.onload = function () {
+                        ctx.drawImage(img1, 0, 0);
+                    };
+                    img1.src = e.target.result;
+                }
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+</head>
+
+</html>

@@ -1,0 +1,20 @@
+canvas {
+    width: 80%;
+    height: 100%
+}
+
+.stack {
+    position:relative;
+    width: 80%;
+    height: 100%;
+    }
+.stack canvas {
+    position:absolute;
+    left:0;
+    top:0;
+    }
+
+#canvas{
+       opacity:0.6;
+       display: inline-block;
+}
